@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <div class="content-block bordered inlined">
+        <canvas id="coordinates-canvas" class="bordered"/>
+        <h:form styleClass="main-form">
+            <fieldset>
+                <legend>Координата X:</legend>
+                <h:inputText styleClass="" id="x-input" maxlength="5"  value="#{resultsController.currentDot.x}"
+                             autocomplete="off" a:placeholder="Число от -3 до 5" validatorMessage="Значение X некорректно!">
+                    <f:validateRequired/>
+                    <f:validateDoubleRange minimum="-3" maximum="5"/>
+                </h:inputText>
+                <h:message showSummary="true" showDetail="false" for="x-input"/>
+            </fieldset>
+
+            <fieldset class="cmd-buttons row">
+                <legend>Координата Y:</legend>
+                <h:commandButton styleClass="y-set-button" type="button" value="-4" />
+                <h:commandButton styleClass="y-set-button" type="button" value="-3" />
+                <h:commandButton styleClass="y-set-button" type="button" value="-2" />
+                <h:commandButton styleClass="y-set-button" type="button" value="-1" />
+                <h:commandButton styleClass="y-set-button active" type="button" value="0" />
+                <h:commandButton styleClass="y-set-button" type="button" value="1" />
+                <h:commandButton styleClass="y-set-button" type="button" value="2" />
+                <h:commandButton styleClass="y-set-button" type="button" value="3" />
+                <h:commandButton styleClass="y-set-button" type="button" value="4" />
+
+                <div id="hidden-input-y">
+                    <h:inputHidden value="#{resultsController.currentDot.y}">
+                        <f:validateRequired/>
+                        <f:validateLongRange minimum="-4" maximum="4"/>
+                    </h:inputHidden>
+                </div>
+            </fieldset>
+
+            <fieldset class="row r-checkbox-group">
+                <legend>Значение R:</legend>
+                <div>
+                    <h:selectBooleanCheckbox id="r-box-1" title="1" value="true"/>
+                    <label for="r-box-1">1</label>
+                </div>
+                <div>
+                    <h:selectBooleanCheckbox id="r-box-2" title="1.5" value="false"/>
+                    <label for="r-box-2">1.5</label>
+                </div>
+                <div>
+                    <h:selectBooleanCheckbox id="r-box-3" title="2" value="false"/>
+                    <label for="r-box-3">2</label>
+                </div>
+                <div>
+                    <h:selectBooleanCheckbox id="r-box-4" title="2.5" value="false"/>
+                    <label for="r-box-4">2.5</label>
+                </div>
+                <div>
+                    <h:selectBooleanCheckbox id="r-box-5" title="3" value="false"/>
+                    <label for="r-box-5">3</label>
+                </div>
+
+                <div id="hidden-input-r">
+                    <h:inputHidden value="#{resultsController.currentDot.r}">
+                        <f:validateRequired/>
+                        <f:validateLongRange minimum="1" maximum="3"/>
+                    </h:inputHidden>
+                </div>
+            </fieldset>
+
+            <h:commandButton value="Проверить" id="send-btn" action="#{resultsController.matchResult()}"/>
+
+        </h:form>
+    </div>
+
+
+</ui:composition>
